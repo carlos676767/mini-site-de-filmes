@@ -51,22 +51,17 @@ const mostrarFilmesTelaInicial = () => {
       data.results.forEach((filmes: any) => {
         const { poster_path, overview } = filmes;
         console.log(overview);
-        
+        mostrarSinopse(overview)
         criarImagemPostFilmes(`https://image.tmdb.org/t/p/w200/${poster_path}`);
-        TraduzirSinopse(overview)
       });
     });
 };
 
-const TraduzirSinopse = (textoTraduzido: string) => {
-  fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(textoTraduzido)}&langpair=en|pt`)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    
-  })
-
+const mostrarSinopse = (textoTraduzido: string) => {
+  const p = document.createElement("p") as HTMLParagraphElement
+  p.innerText = textoTraduzido
+  document.body.appendChild(p)
 }
 
 
-mostrarFilmesTelaInicial();
+mostrarFilmesTelaInicial()
