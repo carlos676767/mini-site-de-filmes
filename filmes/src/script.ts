@@ -20,11 +20,18 @@ darkModeButton.addEventListener("change", () => {
 });
 
 const aplicarValoresSalvosDarkMode = () => {
-  const recuperarValor = localStorage.getItem("modoEscuro")
-  if (recuperarValor === "dark-mode") {
+  const darkModeRecuperarValor = localStorage.getItem("modoEscuro")
+  if (darkModeRecuperarValor === "dark-mode") {
     bodyDarkMode("dark-mode", "white-mode");
+    salvarEstadoCheckBox(true)
   }else{
     bodyDarkMode("white-mode", "dark-mode");
+    salvarEstadoCheckBox(false)
   }
 }
-aplicarValoresSalvosDarkMode()
+
+const salvarEstadoCheckBox = (checkBox: boolean) => {
+  darkModeButton.checked = checkBox
+}
+
+aplicarValoresSalvosDarkMode();
