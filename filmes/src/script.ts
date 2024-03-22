@@ -1,4 +1,6 @@
 const darkModeButton = document.getElementById("dark-mode-toggle") as HTMLInputElement;
+const divFilmes = document.querySelector(".filhasFilmes") as HTMLDivElement
+
 const bodyDarkMode = (classe1: string, classe2: string) => {
     document.body.classList.add(classe1);
     document.body.classList.remove(classe2);
@@ -40,7 +42,7 @@ aplicarValoresSalvosDarkMode();
 const criarImagemPostFilmes = (imagemFilmes: string) => {
   const imagem = document.createElement("img") as HTMLImageElement
   imagem.src = imagemFilmes;
-  document.body.appendChild(imagem);
+ divFilmes.appendChild(imagem);
 }
 
 const mostrarFilmesTelaInicial = () => {
@@ -50,9 +52,13 @@ const mostrarFilmesTelaInicial = () => {
       console.log(data);
       data.results.forEach((filmes: any) => {
         const { poster_path, overview, vote_average, title} = filmes;
-        console.log(title);
-        traduzirEnEspanol(overview)
         criarImagemPostFilmes(`https://image.tmdb.org/t/p/w200/${poster_path}`);
+        console.log(vote_average);
+        
+        const voteaverage  = parseInt(vote_average).toFixed(1)
+        iParaExibirEstaticas(voteaverage)
+        criarBotaoSaibaMais()
+        traduzirEnEspanol(overview)
       });
     });
 };
@@ -60,13 +66,22 @@ const mostrarFilmesTelaInicial = () => {
 const mostrarSinopse = (sinopse: string) => {
   const p = document.createElement("p") as HTMLParagraphElement;
   p.innerText =  sinopse;
-  document.body.appendChild(p);
+  divFilmes.appendChild(p);
 };
 
-const criarBotao = () => {
-  
+const criarBotaoSaibaMais = () => {
+  const botao = document.createElement("button") as HTMLButtonElement
+  botao.innerHTML = "Detalhes"
+  botao.id = "botao"
+  divFilmes.appendChild(botao)
 }
 
+const iParaExibirEstaticas = (texto: string) => {
+  const botaoClassificao = document.createElement("button") as HTMLButtonElement
+  botaoClassificao.innerHTML = `<i class="fa-regular fa-star"></i>${texto}`
+  botaoClassificao.id = "mostrar"
+  divFilmes.appendChild(botaoClassificao)
+}
 
 const traduzirEnEspanol = (texto: string) => {
   const requestOptions = {
@@ -86,3 +101,4 @@ const traduzirEnEspanol = (texto: string) => {
   
 }
 mostrarFilmesTelaInicial()
+

@@ -51,3 +51,42 @@ body{
 .white-mode {
   background-color: white;
 }
+
+main{
+  display: flex;
+  flex-direction: column;
+}
+
+.filmes{
+  display: flex;
+  flex-direction: column;
+}
+
+.filhasFilmes{
+  display: flex;
+  flex-direction: column;
+}
+
+button{
+  width: 20%;
+}
+
+img{
+  width: 200px;
+}
+
+
+
+#botao{
+  background-color: #f1c40f;
+  border: none;
+  padding: 3px;
+  color: white;
+}
+
+#mostrar{
+  display: flex;
+  border: none;
+  background-color: white;
+  margin-right: 30px;
+}
