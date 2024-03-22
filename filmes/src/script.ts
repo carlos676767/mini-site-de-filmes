@@ -49,19 +49,40 @@ const mostrarFilmesTelaInicial = () => {
     .then((data) => {
       console.log(data);
       data.results.forEach((filmes: any) => {
-        const { poster_path, overview } = filmes;
-        console.log(overview);
-        mostrarSinopse(overview)
+        const { poster_path, overview, vote_average, title} = filmes;
+        console.log(title);
+        traduzirEnEspanol(overview)
         criarImagemPostFilmes(`https://image.tmdb.org/t/p/w200/${poster_path}`);
       });
     });
 };
 
-const mostrarSinopse = (textoTraduzido: string) => {
-  const p = document.createElement("p") as HTMLParagraphElement
-  p.innerText = textoTraduzido
-  document.body.appendChild(p)
+const mostrarSinopse = (sinopse: string) => {
+  const p = document.createElement("p") as HTMLParagraphElement;
+  p.innerText =  sinopse;
+  document.body.appendChild(p);
+};
+
+const criarBotao = () => {
+  
 }
 
 
+const traduzirEnEspanol = (texto: string) => {
+  const requestOptions = {
+    method: 'POST'
+  };
+
+  fetch(`https://www.apertium.org/apy/translate?q=${encodeURIComponent(texto)}&langpair=en|es`, requestOptions)
+    .then(response => response.json())
+    .then(data => {
+      const {responseData} = data
+      const tirarEstrelas = responseData.translatedText.replace(/\*/g, '')
+      mostrarSinopse(tirarEstrelas)
+    })
+    .catch(error => {
+      console.error('Ocorreu um erro ao traduzir o texto:', error);
+    });
+  
+}
 mostrarFilmesTelaInicial()
