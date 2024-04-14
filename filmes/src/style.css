@@ -52,30 +52,18 @@ body{
   background-color: white;
 }
 
-main{
-  display: flex;
-  flex-direction: column;
-}
-
-.filmes{
-  display: flex;
-  flex-direction: column;
-}
-
-.filhasFilmes{
-  display: flex;
-  flex-direction: column;
-}
-
-button{
-  width: 20%;
+li{
+  list-style: none;
+  display: inline-block;
 }
 
 img{
   width: 200px;
 }
 
-
+p{
+  color: black;
+}
 
 #botao{
   background-color: #f1c40f;
